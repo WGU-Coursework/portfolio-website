@@ -137,7 +137,6 @@
 
                         // Handle input events
                         input.addEventListener('keydown', handleInput);
-                        input.addEventListener('input', preventPromptDeletion);
                         input.addEventListener('click', maintainCursorPosition);
 
                         return input;
@@ -172,11 +171,6 @@
                         }
                     }
 
-                    // Prevent deleting prompt (not needed since prompt is a span)
-                    function preventPromptDeletion() {
-                        // No action needed as prompt is now a separate span
-                    }
-
                     // Keep cursor in input
                     function maintainCursorPosition() {
                         currentInput.focus();
@@ -187,7 +181,6 @@
                         switch(command.trim().toLowerCase()) {
                             case 'clear':
                                 consoleDiv.innerHTML = '';
-                                createNewPrompt();
                                 break;
                             case 'help':
                                 console.log('Available commands: clear, help, whoami, date');
