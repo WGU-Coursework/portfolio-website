@@ -3,35 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cover Letter</title>
+    <meta name="description" content="Cover letter for Anthony Russano.">
+    <title>Anthony Russano - Cover Letter</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>John Doe</h1>
-        <nav>
+        <h1>Anthony Russano</h1>
+        <nav aria-label="Main navigation">
             <ul>
-                <li><a href="resume.html">Résumé</a></li>
-                <li><a href="coverletter.html">Cover Letter</a></li>
-                <li><a href="careergoals.html">Career Goals</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="coverletter.html" aria-current="page">Cover Letter</a></li>
+                <li><a href="goals.html">Career Goals</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
-        <section>
-            <h2>Cover Letter</h2>
-            <p>Dear Hiring Manager,</p>
-            <p><strong>I am excited to apply for the Web Developer position at XYZ Corp.</strong> With over five years of professional experience in web development, I believe I am a perfect fit for your team.</p>
-            <p><em>I am confident that my skills in front-end technologies such as HTML, CSS, and JavaScript will contribute to the success of your projects.</em></p>
-            <hr>
-            <p>Sincerely,<br>John Doe</p>
-        </section>
+        <article aria-labelledby="cover-letter-heading">
+            <section>
+                <h2 id="cover-letter-heading">Cover Letter</h2>
+                <div class="letter-header">
+                    <p>Anthony Russano<br>
+                    123 Hard Dr<br>
+                    Metropolis, CA 91942<br>
+                    <a href="mailto:me@anthonyrussano.com">me@anthonyrussano.com</a><br>
+                    April 27, 2025</p>
+                    <p>Hiring Manager<br>
+                    Contoso Ltd.<br>
+                    456 Innovation Drive<br>
+                    Tech City, TC 12345</p>
+                </div>
+                <p>Dear Hiring Manager,</p>
+                <p><strong>I am excited to apply for the DevOps Engineer position at Contoso Ltd.</strong> With over five years of professional experience in DevOps and cloud infrastructure, I have honed my skills in designing scalable, secure, and automated solutions across AWS, Azure, and GCP. I am confident that my expertise and passion for operational excellence align perfectly with Contoso Ltd.’s mission to deliver cutting-edge digital infrastructure.</p>
+                <p>At my current role with Children’s Hospital of Philadelphia, I manage DevOps solutions for the enterprise Data & Analytics team, implementing <mark>infrastructure-as-code</mark> with Terraform to streamline deployments, resulting in a <span class="highlight">30% reduction in deployment times</span>. My proficiency in containerization (Docker, Kubernetes), CI/CD pipelines, and security best practices has enabled me to deliver robust systems that meet stringent compliance requirements. Additionally, my experience integrating AI solutions, such as Retrieval-Augmented Generation with Azure services, has enhanced automation workflows.</p>
+                <p>I am particularly drawn to Contoso Ltd.’s commitment to pushing technological boundaries, and I am eager to contribute my technical expertise and creative problem-solving skills to your team. <em>My dedication to continuous learning ensures I stay at the forefront of industry trends</em>, driving innovation in cloud and DevOps practices.</p>
+                <hr>
+                <p>I would welcome the opportunity to discuss how my skills and experiences align with your needs. Thank you for considering my application. I look forward to the possibility of contributing to Contoso Ltd.’s innovative projects.</p>
+                <p>Sincerely,<br>Anthony Russano</p>
+            </section>
+        </article>
     </main>
 
     <footer>
-        <hr>
-        <p>Contact Information: <a href="mailto:john.doe@example.com">john.doe@example.com</a></p>
+        <p>Contact: <a href="mailto:me@anthonyrussano.com" aria-label="Email Anthony Russano">me@anthonyrussano.com</a> | <a href="https://www.linkedin.com/in/anthonyrussano/" aria-label="Anthony Russano's LinkedIn profile">LinkedIn</a></p>
     </footer>
 </body>
 </html>

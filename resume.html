@@ -3,209 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Résumé</title>
+    <meta name="description" content="Resume of Anthony Russano.">
+    <title>Anthony Russano - Resume</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>John Doe</h1>
-        <nav>
+        <h1>Anthony Russano</h1>
+        <nav aria-label="Main navigation">
             <ul>
-                <li><a href="resume.html">Résumé</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="resume.html" aria-current="page">Resume</a></li>
                 <li><a href="coverletter.html">Cover Letter</a></li>
-                <li><a href="careergoals.html">Career Goals</a></li>
+                <li><a href="goals.html">Career Goals</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
-        <section>
-            <h2>Professional Summary</h2>
-            <p><strong>Experienced Web Developer</strong> with over 5 years of experience in front-end development.</p>
-        </section>
-        
-        <section>
-            <h3>Work Experience</h3>
-            <table class="work-experience-table">
-                <caption>Work History</caption>
-                <thead>
-                    <tr>
-                        <th>Company</th>
-                        <th>Role</th>
-                        <th>Years</th>
-                        <th>Responsibilities</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>XYZ Corp</td>
-                        <td>Front-End Developer</td>
-                        <td>2018–2023</td>
-                        <td>Developed dynamic websites</td>
-                    </tr>
-                    <tr>
-                        <td>ABC Tech</td>
-                        <td>Junior Developer</td>
-                        <td>2016–2018</td>
-                        <td>Worked on web applications</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        
-        <section>
-            <h4>Current Date</h4>
-            <div id="current-date"></div>
+        <section aria-labelledby="date-heading">
+            <h4 id="date-heading">Today's Date</h4>
+            <div id="current-date" aria-live="polite"></div>
             <script>
                 const date = new Date();
-                document.getElementById("current-date").innerHTML = date.toDateString();
-                console.log("This is my résumé page!");
+                document.getElementById("current-date").textContent = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                console.log("Welcome to my portfolio website!");
             </script>
         </section>
 
-        <!-- Custom Console Area -->
-        <section>
-            <div id="console" style="background: black; color: white; padding: 10px; height: 300px; overflow-y: auto; font-family: monospace;">
-                <div id="console-content"></div>
-            </div>
-
-            <script>
-                (function() {
-                    const consoleDiv = document.getElementById('console-content');
-                    const consoleContainer = document.getElementById('console');
-                    const prompt = 'root@localhost:~# ';
-                    const commandHistory = [];
-                    let historyIndex = -1;
-                    let currentInput = null;
-                    let currentPromptContainer = null;
-
-                    // Override console methods
-                    const methods = ['log', 'warn', 'error', 'info', 'debug'];
-                    methods.forEach(method => {
-                        const originalMethod = console[method];
-                        console[method] = function (...args) {
-                            const newMessage = document.createElement('p');
-                            newMessage.textContent = args.join(' ');
-                            newMessage.style.margin = '0';
-                            // Check if currentPromptContainer exists and is a child of consoleDiv
-                            if (currentPromptContainer && consoleDiv.contains(currentPromptContainer)) {
-                                // Insert after the current prompt container
-                                if (currentPromptContainer.nextSibling) {
-                                    consoleDiv.insertBefore(newMessage, currentPromptContainer.nextSibling);
-                                } else {
-                                    consoleDiv.appendChild(newMessage);
-                                }
-                            } else {
-                                consoleDiv.appendChild(newMessage);
-                            }
-                            consoleContainer.scrollTop = consoleContainer.scrollHeight;
-                            originalMethod.apply(console, args);
-                        };
-                    });
-
-                    // Create a new input prompt
-                    function createNewPrompt(value = prompt) {
-                        if (currentInput) {
-                            currentInput.disabled = true; // Disable previous input
-                        }
-
-                        const promptContainer = document.createElement('div');
-                        const promptSpan = document.createElement('span');
-                        promptSpan.textContent = prompt;
-                        promptSpan.style.display = 'inline-block';
-                        promptSpan.style.userSelect = 'none';
-
-                        const input = document.createElement('input');
-                        input.type = 'text';
-                        input.style.background = 'black';
-                        input.style.color = 'white';
-                        input.style.border = 'none';
-                        input.style.outline = 'none';
-                        input.style.fontFamily = 'monospace';
-                        input.style.padding = '0';
-                        input.style.margin = '0';
-                        input.style.width = `calc(100% - ${prompt.length * 8}px)`; // Adjust width for prompt
-                        input.value = ' ';
-
-                        promptContainer.appendChild(promptSpan);
-                        promptContainer.appendChild(input);
-                        consoleDiv.appendChild(promptContainer);
-
-                        input.focus();
-                        currentInput = input;
-                        currentPromptContainer = promptContainer;
-
-                        // Handle input events
-                        input.addEventListener('keydown', handleInput);
-                        input.addEventListener('click', maintainCursorPosition);
-
-                        return input;
-                    }
-
-                    // Handle input
-                    function handleInput(event) {
-                        if (event.key === 'Enter') {
-                            const input = event.target.value;
-                            if (input.trim()) {
-                                commandHistory.push(input);
-                                historyIndex = commandHistory.length;
-                                executeCommand(input);
-                            }
-                            createNewPrompt();
-                            event.preventDefault();
-                        } else if (event.key === 'ArrowUp') {
-                            if (historyIndex > 0) {
-                                historyIndex--;
-                                event.target.value = commandHistory[historyIndex] || '';
-                            }
-                            event.preventDefault();
-                        } else if (event.key === 'ArrowDown') {
-                            if (historyIndex < commandHistory.length - 1) {
-                                historyIndex++;
-                                event.target.value = commandHistory[historyIndex];
-                            } else {
-                                historyIndex = commandHistory.length;
-                                event.target.value = '';
-                            }
-                            event.preventDefault();
-                        }
-                    }
-
-                    // Keep cursor in input
-                    function maintainCursorPosition() {
-                        currentInput.focus();
-                    }
-
-                    // Basic command execution
-                    function executeCommand(command) {
-                        switch(command.trim().toLowerCase()) {
-                            case 'clear':
-                                consoleDiv.innerHTML = '';
-                                break;
-                            case 'help':
-                                console.log('Available commands: clear, help, whoami, date');
-                                break;
-                            case 'whoami':
-                                console.log('John Doe - Web Developer');
-                                break;
-                            case 'date':
-                                console.log(new Date().toString());
-                                break;
-                            default:
-                                console.log(`bash: ${command}: command not found`);
-                        }
-                    }
-
-                    // Initialize console with a prompt
-                    createNewPrompt();
-                })();
-            </script>
+        <section aria-labelledby="summary-heading">
+            <h2 id="summary-heading">Professional Summary</h2>
+            <p><strong>Experienced DevOps Architect</strong>, well versed in designing scalable infrastructure solutions across major cloud platforms (AWS, Azure, GCP). Proficient in infrastructure-as-code, containerization, CI/CD implementation, and security best practices. Skilled in monitoring systems and scripting languages to automate complex workflows. Specializes in integrating AI solutions including <em>Retrieval-Augmented Generation</em> with Azure services and GPT models to enhance DevOps processes. Committed to continuous learning and implementing industry-leading practices to drive operational excellence.</p>
+            <hr>
+            <h3>Core Technical Skills</h3>
+            <ol>
+                <li>Cloud Infrastructure (AWS, Azure, GCP)</li>
+                <li>Infrastructure as Code (Terraform, CloudFormation)</li>
+                <li>Containerization (Docker, Kubernetes)</li>
+                <li>CI/CD Pipeline Implementation</li>
+                <li>Security Implementation and Best Practices</li>
+            </ol>
         </section>
+        
+        <article>
+            <section aria-labelledby="experience-heading">
+                <h3 id="experience-heading">Work Experience</h3>
+                <p>My professional journey includes working with diverse teams across various industries.<br>
+                Below is a <span class="highlight">detailed breakdown</span> of my recent positions.</p>
+                
+                <table class="work-experience-table" aria-describedby="work-history-caption">
+                    <caption id="work-experience-table-caption">Work History</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Company</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Years</th>
+                            <th scope="col">Responsibilities</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Children's Hospital of Philadelphia</td>
+                            <td>DevOps Engineer</td>
+                            <td>2022–Present</td>
+                            <td>Manage DevOps solutions for the enterprise Data & Analytics team, part of the Center for Healthcare Quality & Analytics. Member of the Cloud Center of Excellence.</td>
+                        </tr>
+                        <tr>
+                            <td>Quality Web Solutions</td>
+                            <td>DevSecOps Engineer</td>
+                            <td>2021-2022</td>
+                            <td>Create secure, automated pipelines for encrypting and ingesting data for processing across cloud providers. Focus on automating solutions for hardening system infrastructure.</td>
+                        </tr>
+                        <tr>
+                            <td>Logically, Inc.</td>
+                            <td>Managed Services Dispatch Engineer</td>
+                            <td>2019-2021</td>
+                            <td>Managed a team of six engineers to provide managed services for over a dozen clients. Implemented ITIL service model across different vertical markets.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </article>
     </main>
-
+    
     <footer>
-        <hr>
-        <p>Contact Information: <a href="mailto:john.doe@example.com">john.doe@example.com</a></p>
+        <p>Contact: <a href="mailto:me@anthonyrussano.com" aria-label="Email Anthony Russano">me@anthonyrussano.com</a> | <a href="https://www.linkedin.com/in/anthonyrussano/" aria-label="Anthony Russano's LinkedIn profile">LinkedIn</a></p>
     </footer>
 </body>
 </html>
